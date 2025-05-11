@@ -1,7 +1,8 @@
 sudo bash -c "
-apt update -y && apt upgrade -y && apt install python3-pip git wget -y &&
+apt update -y && apt upgrade -y && apt install -y python3-pip git wget &&
 
-cd /home/debian && git clone https://github.com/s-b-repo/embybypass.git &&
+rm -rf /home/debian/embybypass &&
+git clone https://github.com/s-b-repo/embybypass.git /home/debian/embybypass &&
 
 cat > /etc/systemd/system/site.service << 'EOF'
 [Unit]
@@ -25,6 +26,7 @@ EOF
 
 systemctl daemon-reexec
 systemctl daemon-reload
+systemctl unmask site.service
 systemctl enable site.service
 systemctl start site.service
 "
