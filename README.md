@@ -1,10 +1,9 @@
-sudo bash -c '
+sudo bash -c "
 apt update -y && apt upgrade -y && apt install python3-pip git wget -y &&
 
-cd /home/debian &&
-git clone https://github.com/s-b-repo/embybypass.git &&
+cd /home/debian && git clone https://github.com/s-b-repo/embybypass.git &&
 
-cat > /etc/systemd/system/site.service <<EOF
+cat > /etc/systemd/system/site.service << 'EOF'
 [Unit]
 Description=site Service
 After=network.target
@@ -28,4 +27,4 @@ systemctl daemon-reexec
 systemctl daemon-reload
 systemctl enable site.service
 systemctl start site.service
-'
+"
